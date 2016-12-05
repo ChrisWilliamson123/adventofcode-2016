@@ -8,13 +8,18 @@ def split_name(name):
     return [letters, sectorID, checksum]
 
 def shift_cipher(string, shift_amount):
+    # Mod with 26 to get the actual shift amount
     shift_amount %= 26
+    # Initialise a string which will hold our final shifted string
     new_string = ''
+    # Loop through each character
     for character in string:
         upper = character.upper()
+        # If the shift loops round to the start of the alphabet, get the correct character
         if ord(upper) + shift_amount > 90:
             new_char = chr(64 + ((ord(upper) + shift_amount) - 90))
         else:
+            # Add the shift amount like normal
             new_char = chr(ord(upper) + shift_amount)
         new_string += new_char
     return new_string
