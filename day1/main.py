@@ -7,8 +7,10 @@ for line in input_file:
 
 # Set up initial coords and direction stuff
 co_ords = [0, 0]
+all_visited = []
 compass_directions = ['N', 'E', 'S', 'W']
 current_direction = 0
+visited_twice = []
 
 # For each direction
 for direction in directions:
@@ -38,9 +40,18 @@ for direction in directions:
     if current_direction > 1:
         multiplier = -1
 
-    # Change the co-ord value
-    co_ords[co_ord_to_change] += int(blocks_to_walk)*multiplier
+    # Loop through all the movements we need to do
+    for i in range(1, int(blocks_to_walk)+1):
+        # Update our position
+        co_ords[co_ord_to_change] += multiplier
+        # If this position has been visited, add to visited_twice list
+        if co_ords in all_visited:
+            visited_twice.append(list(co_ords))
+        # Add our coord to out visited list
+        all_visited.append(list(co_ords))
 
 print('Final co-ords: ' + str(co_ords))
 # Get the Manhattan distance
 print('Minimum distance: ' + str(abs(co_ords[0]) + abs(co_ords[1])))
+# Distance from the first point that has been visited twice
+print(abs(visited_twice[0][0]) + abs(visited_twice[0][1]))
