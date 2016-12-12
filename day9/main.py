@@ -45,8 +45,7 @@ def build_final_string(input_text, markers):
     return final_string
 
 def main():
-    input_text = open('input.txt', 'r') .read()
-    # re.match(r'\(\d+x\d+\)', '(143x8)').group()
+    input_text = open('input.txt', 'r').read()
     markers_with_endpoints = remove_overlaps(find_markers(input_text))
     
     print(len(build_final_string(input_text, markers_with_endpoints)))
